@@ -1,13 +1,13 @@
 import { Database } from "bun:sqlite";
 
 export function newDatabase(pathToDB: string): Database {
-  const db = new Database(pathToDB);
-  autoMigrate(db);
-  return db;
+	const db = new Database(pathToDB);
+	autoMigrate(db);
+	return db;
 }
 
 function autoMigrate(db: Database) {
-  const userTable = `
+	const userTable = `
 	CREATE TABLE IF NOT EXISTS users (
 		id TEXT PRIMARY KEY,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -16,9 +16,9 @@ function autoMigrate(db: Database) {
 		email TEXT UNIQUE NOT NULL
 	);
 	`;
-  db.exec(userTable);
+	db.exec(userTable);
 
-  const refreshTokenTable = `
+	const refreshTokenTable = `
 	CREATE TABLE IF NOT EXISTS refresh_tokens (
 		token TEXT PRIMARY KEY,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -29,9 +29,9 @@ function autoMigrate(db: Database) {
 		FOREIGN KEY(user_id) REFERENCES users(id)
 	);
 	`;
-  db.exec(refreshTokenTable);
+	db.exec(refreshTokenTable);
 
-  const videoTable = `
+	const videoTable = `
 	CREATE TABLE IF NOT EXISTS videos (
 		id TEXT PRIMARY KEY,
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -44,11 +44,11 @@ function autoMigrate(db: Database) {
 		FOREIGN KEY(user_id) REFERENCES users(id)
 	);
 	`;
-  db.exec(videoTable);
+	db.exec(videoTable);
 }
 
 export function reset(db: Database) {
-  db.exec("DELETE FROM refresh_tokens");
-  db.exec("DELETE FROM users");
-  db.exec("DELETE FROM videos");
+	db.exec("DELETE FROM refresh_tokens");
+	db.exec("DELETE FROM users");
+	db.exec("DELETE FROM videos");
 }
