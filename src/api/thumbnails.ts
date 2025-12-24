@@ -4,13 +4,7 @@ import { getVideo, updateVideo } from "../db/videos";
 import type { ApiConfig } from "../config";
 import type { BunRequest } from "bun";
 import { BadRequestError, NotFoundError, UserForbiddenError } from "./errors";
-import { generateThumbnailURL, getAssetDiskPath, getAssetPath, getAssetURL, mediaTypeToExt, saveThumbnail, validateThumbnailMediaType } from "./assets";
-import { randomBytes } from "crypto";
-
-type Thumbnail = {
-	data: ArrayBuffer;
-	mediaType: string;
-};
+import { getAssetDiskPath, getAssetPath, getAssetURL } from "./assets";
 
 export async function handlerGetThumbnail(cfg: ApiConfig, req: BunRequest) {
 	const { videoId } = req.params as { videoId?: string };

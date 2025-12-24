@@ -38,3 +38,7 @@ export function getAssetDiskPath(cfg: ApiConfig, assetPath: string) {
 export function getAssetURL(cfg: ApiConfig, assetPath: string) {
 	return `http://localhost:${cfg.port}/assets/${assetPath}`;
 }
+
+export function getS3AssetURL(cfg: ApiConfig, key: string) {
+	return `https://${cfg.s3Bucket}.s3.${cfg.s3Region}.amazonaws.com/${key}`
+}
