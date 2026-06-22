@@ -79,6 +79,8 @@ Bun.serve({
 
 console.log(`Server running at http://localhost:${cfg.port}`);
 
+
+
 async function serveStaticFile(relativePath: string, basePath: string) {
 	const filePath = `${basePath}/${relativePath}`;
 
